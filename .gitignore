@@ -7,6 +7,9 @@
 *.dll
 *.so
 *.dylib
+git-backup
+log.txt
+config.yaml
 
 # Test binary, built with `go test -c`
 *.test
