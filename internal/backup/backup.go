@@ -21,7 +21,12 @@ func Run(cfg config.Configuration, log *slog.Logger) BackupResults {
 			results.Results = append(results.Results, job.BuildErrorResult(err, "init", ""))
 			continue
 		}
-		defer job.Clean()
+		defer func() {
+			if r := recover(); r != nil {
+				log.Error("Recovered in f", r)
+			}
+			job.Clean()
+		}()
 
 		results.Results = append(results.Results, job.Backup())
 		results.Results = append(results.Results, job.Archive()...)

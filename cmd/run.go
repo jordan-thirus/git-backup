@@ -4,6 +4,8 @@ Copyright © 2024 Jordan Thirus <jordan.thirus@gmail.com>
 package cmd
 
 import (
+	"log/slog"
+
 	"github.com/jordan-thirus/git-backup/internal/backup"
 	"github.com/spf13/cobra"
 )
@@ -15,8 +17,9 @@ var runCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		Log.Debug("Run called")
 		backup.Init(Cfg.Archive, Log)
-		backup.Run(Cfg, Log)
+		results := backup.Run(Cfg, Log)
 		Log.Info("Run complete")
+		Log.Debug("Results", slog.Any("results", results))
 	},
 }
 

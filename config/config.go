@@ -22,8 +22,11 @@ type Repository struct {
 	Path        string
 	Branch      string
 	ArchiveOnly bool
-	ArchiveRefs []string
-	Releases    []string
+	ArchiveRefs []ArchiveRef
+}
+type ArchiveRef struct {
+	Name string
+	Type string
 }
 
 var Default = &Configuration{
